@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="MyApp" ng-controller="UsersCtrl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NoSQL to Services</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- Lodash -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <header class="page-header text-center">
+      <h1>NoSQL to Services</h1>
+    </header>
+
+
+    <main class="container">
+
+      <!-- Create User Form -->
+      <h1>Create a User</h1>
+      <form>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" ng-model="userParams.username">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" ng-model="userParams.email">
+        </div>
+        <div class="form-group">
+          <label>Birthday</label>
+          <input type="text" class="form-control" ng-model="userParams.birthday">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <input type="text" class="form-control" ng-model="userParams.profile.gender">
+        </div>
+        <div class="form-group">
+          <label>Favorite Food</label>
+          <input type="text" class="form-control" ng-model="userParams.profile.favorite_food">
+        </div>
+        <div class="form-group">
+          <a href="" ng-click="createUser()">Submit</a>
+        </div>
+      </form>
+
+      <!-- Users -->
+      <p class="text-danger" ng-if="isEmpty(users)">No users</p>
+
+      <div class="users col-xs-6">
+        <div class="user" ng-repeat="(id, user) in users">
+          <h2>Username: {{ user.username }} <a href="" class="text-danger" ng-click="user.destroy()">&times;</a></h2>
+          <h4>Key: {{ id }}, ID: {{ user.id }}</h4>
+          <p>Email: {{ user.email }}</p>
+          <p>Birthday: {{ user.birthday }}</p>
+          <h3>Profile</h3>
+          <p>Gender: {{ user.profile.gender }}</p>
+          <p>Favorite Food: {{ user.profile.favorite_food }}</p>
+          <hr>
+        </div>
+      </div>
+
+      <!-- Birthdays -->
+      <p class="text-danger" ng-if="isEmpty(birthdays)">No birthdays</p>
+
+      <div class="birthdays col-xs-6">
+        <div class="birthday" ng-repeat="(birthday, userIds) in birthdays">
+          <h2>{{ birthday }}</h2>
+
+          <!-- Users with Birthday -->
+          <div class="user" ng-repeat="userId in userIds">
+            <p>{{ users[userId].username }}</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- App -->
+    <script src="/js/app.js"></script>
+
+    <!-- Services -->
+    <script src="/js/services/user_service.js"></script>
+    <script src="/js/services/birthday_service.js"></script>
+
+    <!-- Controllers -->
+    <script src="/js/controllers/users_ctrl.js"></script>
+  </body>
+</html>
+
