@@ -10,7 +10,7 @@ MyApp.factory('BirthdayService',
     // Private
     // ----------------------------------------
 
-    var _birthdays;
+    var _birthdays = {};
 
     // ----------------------------------------
     // Public
@@ -65,8 +65,8 @@ MyApp.factory('BirthdayService',
       })
         .then(function(response) {
 
-          // Set _birthdays to the response data
-          return _birthdays = response.data;
+          // Copy in the data and return
+          return angular.copy(response.data, _birthdays);
         });
     };
 

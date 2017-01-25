@@ -11,7 +11,7 @@ MyApp.factory('UserService',
     // ----------------------------------------
 
     var _id;
-    var _users;
+    var _users = {};
 
 
     var _extendUser = function(user) {
@@ -91,9 +91,8 @@ MyApp.factory('UserService',
       })
         .then(function(response) {
 
-          // Set the _users object
-          // to the response data
-          _users = response.data;
+          // Copy in the data
+          angular.copy(response.data, _users);
 
           // Extend the list of users
           _extendUsers(_users);

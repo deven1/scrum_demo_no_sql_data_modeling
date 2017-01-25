@@ -29,6 +29,16 @@ MyApp.controller('UsersCtrl',
       });
 
     $scope.createUser = function() {
+      var u = $scope.userParams;
+      var user = {
+        username: u.username,
+        email: u.email,
+        birthday: u.birthday,
+        profile: {
+          gender: u.profile.gender,
+          favorite_food: u.profile.favorite_food
+        }
+      };
       UserService.create($scope.userParams);
     };
 
