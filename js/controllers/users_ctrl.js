@@ -39,7 +39,7 @@ MyApp.controller('UsersCtrl',
           favorite_food: u.profile.favorite_food
         }
       };
-      UserService.create($scope.userParams);
+      UserService.create(user);
     };
 
   }]);
